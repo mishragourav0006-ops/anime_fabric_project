@@ -49,7 +49,7 @@ Data Storage	Fabric Lakehouse
 Data Querying	T-SQL (SQL Endpoint)
 Visualization	Power BI (Fabric Dashboard)
 Version Control	GitHub
-📁 Project Structure
+Project Structure
 anime_fabric_project/
 │
 ├── dashboard/
@@ -121,6 +121,10 @@ GROUP BY year
 ORDER BY year ASC;
 
 → Dashboard Overview
+
+<img width="1187" height="670" alt="image" src="https://github.com/user-attachments/assets/c01de0f5-2b64-478c-8aea-fc23c6c58d0a" />
+
+
 
 my dashboard includes 5 analytics visuals:
 
