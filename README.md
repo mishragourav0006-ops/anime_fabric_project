@@ -1,222 +1,142 @@
-Anime Analytics Project using Microsoft Fabric
+🖼️ Dashboard Preview
 
-This project demonstrates a complete end-to-end data engineering pipeline using Microsoft Fabric, built using data from the Jikan Anime API (a public MyAnimeList API).
-The pipeline covers:
-
-. API ingestion
-. Data cleaning & transformation using PySpark
-. Data storage in Lakehouse
-. SQL analysis
-. Interactive dashboard creation
-. GitHub-based documentation & project structure
-
-This project was created as part of the Big Data Final Semester Project (MADSC102).
-
-→ Project Architecture
-Jikan Anime API → Microsoft Fabric Notebook (PySpark)
-.Bronze Layer (Raw Data)
-.Silver Layer (Cleaned Data)
-.SQL queries in Lakehouse
-.Power BI Dashboard
-.GitHub Repository for Submission
-
-🔗 API Source
-
-We used the free Jikan API:
-
-https://api.jikan.moe/v4/anime
+<img width="1346" height="673" alt="image" src="https://github.com/user-attachments/assets/559098fa-69de-4b79-b019-acdb41b0ab30" />
 
 
-The ingestion script fetches:
+(Insert your dashboard image here once GitHub renders it)
 
-Anime titles
+⚙️ Project Workflow
 
-Scores
+This project follows a structured Fabric ETL pipeline, executed through a PySpark notebook and SQL queries:
 
-Ranking
+1️⃣ Extract — API Data Collection
 
-Genres
+File: notebook/anime_ingestion_cleaning.ipynb
 
-Release year
+✔ Connects to Jikan REST API
+✔ Fetches anime metadata (title, score, genres, type, popularity, etc.)
+✔ Raw JSON is converted into a PySpark DataFrame
 
-Type (TV, Movie, OVA, etc.)
+2️⃣ Transform — Data Cleaning in PySpark
 
-→ Technologies Used
-Component	Tool
-Data Ingestion	Python (requests), Microsoft Fabric Notebook
-Data Cleaning	PySpark
-Data Storage	Fabric Lakehouse
-Data Querying	T-SQL (SQL Endpoint)
-Visualization	Power BI (Fabric Dashboard)
-Version Control	GitHub
-Project Structure
-anime_fabric_project/
-│
-├── dashboard/
-│     └── Anime_Dashboard.png
-│
-├── notebook/
-│     └── anime_ingestion_cleaning.ipynb
-│
-├── sql/
-│     ├── sql_genre_count.sql
-│     ├── sql_top_anime.sql
-│     └── sql_year_count.sql
-│
-└── README.md
+The PySpark notebook performs the following:
 
-→ Notebook Workflow (ETL)
-Step 1 — API Ingestion
+✔ Extracts nested fields (genres, studios)
+✔ Handles missing values
+✔ Casts numeric fields
+✔ Renames and selects key analytics columns
+✔ Creates the final cleaned table: anime_cleaned
 
-Requested the top 25 anime using Jikan API
+➡ Output stored in Fabric Lakehouse (Delta Format)
 
-Converted JSON → PySpark DataFrame
+3️⃣ Load — Store & Query with Fabric SQL Endpoint
 
-Stored in Bronze table
+SQL files located in the sql/ folder include:
 
-Step 2 — Data Cleaning
+SQL File	Purpose
+sql_top_anime.sql	Top 10 anime by score
+sql_genre_count.sql	Count of anime per genre
+sql_year_count.sql	Anime distribution by year
 
-Selected relevant columns
+✔ The Delta table is queryable inside Fabric using SQL Analytics Endpoint
+✔ Results feed into the Power BI dashboard
 
-Exploded genre arrays
+🖥️ Technologies & Tools Used
+Tool / Tech	Purpose
+Python (PySpark)	Data ingestion & transformation inside Fabric Notebook
+Requests, Pandas	API calls & initial data handling
+Microsoft Fabric Lakehouse	Storage of raw & cleaned Delta tables
+Fabric SQL Endpoint	Running analytical SQL queries
+Power BI Desktop	Interactive dashboard & visuals
+Git & GitHub	Version control & project hosting
+🚀 How to Run This Project End-to-End
+✅ Prerequisites
 
-Removed null/duplicate entries
+Microsoft Fabric workspace
 
-Converted year and score fields
+Python environment inside Fabric Notebook
 
-Stored cleaned data in Silver table
+Power BI Desktop installed
 
-Step 3 — Load to Lakehouse
+Git installed (optional, for local work)
 
-Saved cleaned dataframe as a Lakehouse table
+📌 Step-by-Step Setup
+1️⃣ Clone the repository
+git clone https://github.com/mishragourav0006-ops/anime_fabric_project.git
+cd anime_fabric_project
 
-Exposed the table to SQL Endpoint for query execution
+2️⃣ Open the PySpark notebook in Microsoft Fabric
 
-→ SQL Queries
-🔹1. Top 10 Highest Rated Anime
+Navigate to:
 
-File: /sql/sql_top_anime.sql
+notebook/anime_ingestion_cleaning.ipynb
 
+
+Run all cells to:
+
+✔ Fetch API data
+✔ Clean & transform it
+✔ Save the final Delta table into Lakehouse
+
+3️⃣ Run SQL Queries (Optional but Recommended)
+
+Open each SQL file inside sql/:
+
+-- Example: Top Anime
 SELECT title, score
-FROM anime_clean
+FROM anime_cleaned
 ORDER BY score DESC
 LIMIT 10;
 
-🔹2. Anime Count by Genre
 
-File: /sql/sql_genre_count.sql
+These queries validate the dataset and feed into Power BI modeling.
 
-SELECT genre, COUNT(*) AS anime_count
-FROM anime_clean
-GROUP BY genre
-ORDER BY anime_count DESC;
+4️⃣ Open the Power BI Dashboard
 
-🔹3. Anime Count by Release Year
+Download the dataset via Fabric SQL endpoint
+Import into Power BI → build visuals OR open your saved .pbix file
+View insights like:
 
-File: /sql/sql_year_count.sql
+Top-rated anime
 
-SELECT year, COUNT(*) AS count_anime
-FROM anime_clean
-GROUP BY year
-ORDER BY year ASC;
+Genre distribution
 
-→ Dashboard Overview
+Score trends
 
-<img width="1187" height="670" alt="image" src="https://github.com/user-attachments/assets/c01de0f5-2b64-478c-8aea-fc23c6c58d0a" />
+Anime type breakdown
 
+Popularity vs Score correlations
 
+📊 Dashboard Insights (Summary)
 
-my dashboard includes 5 analytics visuals:
+✔ TV anime dominate the dataset compared to Movies
+✔ Action & Comedy are the most frequent genres
+✔ Rating trends show peak quality around 1999–2003
+✔ Some anime score high but are not extremely popular (and vice-versa)
+✔ Studios contribute differently to score and popularity metrics
 
-1. Top 10 Anime (Bar Chart)
+📁 Project Structure
+anime_fabric_project/
+│
+├── dashboard/
+│   └── Anime_Dashboard.png
+│
+├── notebook/
+│   └── anime_ingestion_cleaning.ipynb
+│
+├── sql/
+│   ├── sql_genre_count.sql
+│   ├── sql_top_anime.sql
+│   └── sql_year_count.sql
+│
+└── README.md
 
-Axis: Title
+🎯 Conclusion
 
-Values: Score
+This project demonstrates your ability to:
 
-Insight: Helps identify the highest-rated anime.
-
-2. Anime Count by Genre (Donut Chart)
-
-Legend: Genre
-
-Values: Count of Titles
-
-Insight: Shows which genres dominate the anime industry.
-
-3. Anime Count by Year (Column Chart)
-
-Axis: Year
-
-Values: Count of Titles
-
-Insight: Identifies anime production trends over time.
-
-4. Anime Type Distribution (Pie Chart)
-
-Field: type
-
-Values: Count
-
-Insight: Shows ratio of TV vs Movie vs OVA etc.
-
-5. Score Distribution (Histogram / Area Chart)
-
-Field: Score
-
-Insight: Shows how anime scores are spread.
-
-Screenshot is stored in:
-/dashboard/Anime_Dashboard.png
-
-Insights & Conclusion
-
-. TV series dominate the anime landscape
-. Scores are mostly between 7.0 – 8.5, meaning quality is consistently high
-. Action, Adventure, and Fantasy are the most common genres
-. Anime production increased significantly after 2010
-. The highest-rated anime are generally long-running or critically acclaimed series
-
-This project demonstrates the ability to:
-
-Integrate real-world APIs
-
-Build ETL pipelines in Microsoft Fabric
-
-Transform datasets with PySpark
-
-Query structured tables with SQL
-
-Create meaningful dashboards for analytics
-
-How to Run This Project
-1. Clone the repo
-git clone https://github.com/yourusername/anime_fabric_project.git
-
-2. Open the notebook in Microsoft Fabric
-
-Upload anime_ingestion_cleaning.ipynb.
-
-3. Run the notebook
-
-This will ingest API data and create Lakehouse tables.
-
-4. Run SQL Scripts
-
-Use the SQL Endpoint and run scripts in /sql folder.
-
-5. Import Dashboard
-
-Recreate visuals in Power BI using your Fabric semantic model.
-
-Final Notes
-
-This project fulfills all required components of a Big Data ETL + Visualization assignment:
-
-. Data ingestion
-. Data cleaning
-. Data storage
-. SQL analysis
-. Dashboard insights
-. GitHub submission# anime_fabric_project
-
+✔ Build a professional ETL pipeline
+✔ Work with APIs & PySpark
+✔ Use Microsoft Fabric Lakehouse + SQL
+✔ Build real-world dashboards in Power BI
+✔ Structure a clean data engineering project for your portfolio
