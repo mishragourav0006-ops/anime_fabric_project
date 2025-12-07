@@ -1,6 +1,7 @@
 Anime Analytics ETL Pipeline Using Microsoft Fabric
 Dashboard Preview
-<img width="1346" height="673" alt="image" src="https://github.com/user-attachments/assets/559098fa-69de-4b79-b019-acdb41b0ab30" />
+<img width="562" height="316" alt="image" src="https://github.com/user-attachments/assets/7749e34a-532b-4484-9831-7646d850503e" />
+
 
 
 Project Overview
