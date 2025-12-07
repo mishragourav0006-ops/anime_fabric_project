@@ -1,121 +1,128 @@
-**Dashboard Preview**
-
+Anime Analytics ETL Pipeline Using Microsoft Fabric
+Dashboard Preview
 <img width="1346" height="673" alt="image" src="https://github.com/user-attachments/assets/559098fa-69de-4b79-b019-acdb41b0ab30" />
 
 
-(Insert your dashboard image here once GitHub renders it)
+Project Overview
 
-**Project Workflow**
+In this project, I built a complete end-to-end ETL pipeline using Microsoft Fabric, PySpark, SQL, and Power BI.
+The goal was to collect anime metadata from the Jikan REST API, transform it into a clean analytical dataset, store it in a Lakehouse, and design a dashboard to visualize trends in anime ratings, genres, popularity, and studio performance.
 
-This project follows a structured Fabric ETL pipeline, executed through a PySpark notebook and SQL queries:
+Project Workflow
+1. Extract — Collecting Data from the Jikan API
 
-**1️. Extract — API Data Collection**
+I started by connecting to the Jikan Anime API through a PySpark notebook.
+The API provides rich metadata such as:
 
-File: notebook/anime_ingestion_cleaning.ipynb
+Anime titles
 
-.Connects to Jikan REST API
-.Fetches anime metadata (title, score, genres, type, popularity, etc.)
-.Raw JSON is converted into a PySpark DataFrame
+Genres
 
-**2️ Transform — Data Cleaning in PySpark**
+Studios
 
-The PySpark notebook performs the following:
+Scores and popularity metrics
 
-.Extracts nested fields (genres, studios)
-. Handles missing values
-. Casts numeric fields
-. Renames and selects key analytics columns
-. Creates the final cleaned table: anime_cleaned
+Type (TV, Movie, OVA, etc.)
 
-➡ Output stored in Fabric Lakehouse (Delta Format)
+Seasons and release years
 
-**3️ Load — Store & Query with Fabric SQL Endpoint
-**
-SQL files located in the sql/ folder include:
+The raw JSON response was converted into a PySpark DataFrame for further processing.
+
+2. Transform — Cleaning & Structuring the Dataset
+
+Inside the Fabric PySpark notebook, I performed several transformations:
+
+Extracted nested fields like genres and studios
+
+Handled missing and null values
+
+Casted numeric values into correct data types
+
+Selected and renamed the columns required for analysis
+
+Added a simplified studio and genre column for dashboard use
+
+After cleaning, I generated a final curated table called anime_cleaned, which became the core dataset for SQL queries and reporting.
+
+The final dataset was saved in the Microsoft Fabric Lakehouse in Delta format.
+
+3. Load — Querying and Modeling with Fabric SQL Endpoint
+
+I used the Fabric SQL endpoint to run analytical queries stored in the sql/ folder:
 
 SQL File	Purpose
-sql_top_anime.sql	Top 10 anime by score
-sql_genre_count.sql	Count of anime per genre
-sql_year_count.sql	Anime distribution by year
+sql_top_anime.sql	Retrieves top 10 anime ranked by score
+sql_genre_count.sql	Counts anime grouped by genre
+sql_year_count.sql	Shows anime distribution across release years
 
-. The Delta table is queryable inside Fabric using SQL Analytics Endpoint
-.  Results feed into the Power BI dashboard
+These SQL outputs were later connected to Power BI for data modeling and visualization.
 
-**Technologies & Tools Used**
-Tool / Tech	Purpose
-Python (PySpark)	Data ingestion & transformation inside Fabric Notebook
-Requests, Pandas	API calls & initial data handling
-Microsoft Fabric Lakehouse	Storage of raw & cleaned Delta tables
-Fabric SQL Endpoint	Running analytical SQL queries
-Power BI Desktop	Interactive dashboard & visuals
-Git & GitHub	Version control & project hosting
-➡ How to Run This Project End-to-End
-**Prerequisites**
-
-Microsoft Fabric workspace
-
-Python environment inside Fabric Notebook
-
-Power BI Desktop installed
-
-Git installed (optional, for local work)
-
-**Step-by-Step Setup**
-1️.Clone the repository
+Technologies & Tools Used
+Tool / Technology	Role
+PySpark	Data ingestion and transformation
+Requests & Pandas	API calling & initial JSON handling
+Microsoft Fabric Lakehouse	Storage for raw & cleaned Delta tables
+Fabric SQL Endpoint	Querying and analytics
+Power BI Desktop	Designing the dashboard
+GitHub	Version control and documentation
+How I Ran the Project End-to-End
+1. Cloned the Repository
 git clone https://github.com/mishragourav0006-ops/anime_fabric_project.git
 cd anime_fabric_project
 
-2️. Open the PySpark notebook in Microsoft Fabric
+2. Executed the PySpark Notebook in Fabric
 
-Navigate to:
+From notebook/anime_ingestion_cleaning.ipynb, I ran all cells to:
 
-notebook/anime_ingestion_cleaning.ipynb
+Fetch data from the API
 
+Clean and restructure the dataset
 
-Run all cells to:
+Save the final table into the Lakehouse
 
-. Fetch API data
-. Clean & transform it
-. Save the final Delta table into Lakehouse
+3. Ran SQL Files for Analysis
 
-3️. Run SQL Queries (Optional but Recommended)
+The SQL scripts validated the cleaned table and prepared key analytics such as:
 
-Open each SQL file inside sql/:
-
-Example: Top Anime
 SELECT title, score
 FROM anime_cleaned
 ORDER BY score DESC
 LIMIT 10;
 
 
-These queries validate the dataset and feed into Power BI modeling.
+These outputs helped define the Power BI visuals.
 
-4️. Open the Power BI Dashboard
+4. Built the Power BI Dashboard
 
-Download the dataset via Fabric SQL endpoint
-Import into Power BI → build visuals OR open your saved .pbix file
-View insights like:
+Using the SQL endpoint as a data source, I created visuals illustrating:
 
 Top-rated anime
 
 Genre distribution
 
-Score trends
+Score trends over the years
 
-Anime type breakdown
+Comparison of anime types
 
-Popularity vs Score correlations
+Popularity vs score insights
 
-Dashboard Insights (Summary)
+Studio-level contributions
 
-.TV anime dominate the dataset compared to Movies
-.Action & Comedy are the most frequent genres
-.Rating trends show peak quality around 1999–2003
-.Some anime score high but are not extremely popular (and vice-versa)
-.Studios contribute differently to score and popularity metrics
+Dashboard Insights
 
-**Project Structure**
+Some of the insights I observed:
+
+TV shows form the majority of anime releases
+
+Action and Comedy emerged as the most dominant genres
+
+The early 2000s showed strong scoring trends across many titles
+
+Several anime ranked high but did not have similarly high popularity levels
+
+Studios vary significantly in terms of the average scores they produce
+
+Project Structure
 anime_fabric_project/
 │
 ├── dashboard/
@@ -131,12 +138,18 @@ anime_fabric_project/
 │
 └── README.md
 
-**Conclusion**
+Conclusion
 
-This project demonstrates your ability to:
+This project helped me demonstrate my ability to:
 
-. Build a professional ETL pipeline
-. Work with APIs & PySpark
-. Use Microsoft Fabric Lakehouse + SQL
-. Build real-world dashboards in Power BI
-. Structure a clean data engineering project for your portfolio
+Work with REST APIs and handle semi-structured JSON data
+
+Build ETL workflows using PySpark inside Microsoft Fabric
+
+Store and query data using Lakehouse architecture
+
+Apply SQL for analytical exploration
+
+Develop a polished, interactive dashboard in Power BI
+
+Structure and present a professional data engineering mini-projectolio
