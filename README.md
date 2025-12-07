@@ -1,16 +1,15 @@
-Anime Analytics ETL Pipeline Using Microsoft Fabric
+**Anime Analytics ETL Pipeline Using Microsoft Fabric**
 Dashboard Preview
 <img width="562" height="316" alt="image" src="https://github.com/user-attachments/assets/7749e34a-532b-4484-9831-7646d850503e" />
 
 
 
-Project Overview
-
+**Project Overview**
 In this project, I built a complete end-to-end ETL pipeline using Microsoft Fabric, PySpark, SQL, and Power BI.
 The goal was to collect anime metadata from the Jikan REST API, transform it into a clean analytical dataset, store it in a Lakehouse, and design a dashboard to visualize trends in anime ratings, genres, popularity, and studio performance.
 
-Project Workflow
-1. Extract — Collecting Data from the Jikan API
+**Project Workflow**
+**1. **Extract — Collecting Data from the Jikan API****
 
 I started by connecting to the Jikan Anime API through a PySpark notebook.
 The API provides rich metadata such as:
@@ -29,7 +28,7 @@ Seasons and release years
 
 The raw JSON response was converted into a PySpark DataFrame for further processing.
 
-2. Transform — Cleaning & Structuring the Dataset
+**2. **Transform — Cleaning & Structuring the Dataset****
 
 Inside the Fabric PySpark notebook, I performed several transformations:
 
@@ -47,7 +46,7 @@ After cleaning, I generated a final curated table called anime_cleaned, which be
 
 The final dataset was saved in the Microsoft Fabric Lakehouse in Delta format.
 
-3. Load — Querying and Modeling with Fabric SQL Endpoint
+**3. Load — Querying and Modeling with Fabric SQL Endpoint**
 
 I used the Fabric SQL endpoint to run analytical queries stored in the sql/ folder:
 
@@ -58,7 +57,8 @@ sql_year_count.sql	Shows anime distribution across release years
 
 These SQL outputs were later connected to Power BI for data modeling and visualization.
 
-Technologies & Tools Used
+**Technologies & Tools Used**
+
 Tool / Technology	Role
 PySpark	Data ingestion and transformation
 Requests & Pandas	API calling & initial JSON handling
@@ -66,12 +66,14 @@ Microsoft Fabric Lakehouse	Storage for raw & cleaned Delta tables
 Fabric SQL Endpoint	Querying and analytics
 Power BI Desktop	Designing the dashboard
 GitHub	Version control and documentation
-How I Ran the Project End-to-End
-1. Cloned the Repository
+
+**How I Ran the Project End-to-End**
+
+**1. Cloned the Repository**
 git clone https://github.com/mishragourav0006-ops/anime_fabric_project.git
 cd anime_fabric_project
 
-2. Executed the PySpark Notebook in Fabric
+**2. Executed the PySpark Notebook in Fabric**
 
 From notebook/anime_ingestion_cleaning.ipynb, I ran all cells to:
 
@@ -81,7 +83,7 @@ Clean and restructure the dataset
 
 Save the final table into the Lakehouse
 
-3. Ran SQL Files for Analysis
+**3. Ran SQL Files for Analysis**
 
 The SQL scripts validated the cleaned table and prepared key analytics such as:
 
@@ -93,7 +95,7 @@ LIMIT 10;
 
 These outputs helped define the Power BI visuals.
 
-4. Built the Power BI Dashboard
+**4. Built the Power BI Dashboard**
 
 Using the SQL endpoint as a data source, I created visuals illustrating:
 
@@ -123,7 +125,7 @@ Several anime ranked high but did not have similarly high popularity levels
 
 Studios vary significantly in terms of the average scores they produce
 
-Project Structure
+**Project Structure**
 anime_fabric_project/
 │
 ├── dashboard/
@@ -139,7 +141,7 @@ anime_fabric_project/
 │
 └── README.md
 
-Conclusion
+**Conclusion**
 
 This project helped me demonstrate my ability to:
 
