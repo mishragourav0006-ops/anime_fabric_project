@@ -8,10 +8,12 @@ It is easy to establish the driver factors that would contribute in the producti
 
 
 **Project Overview**
+
 This project allowed me to create a complete end-to-end ETL pipeline with Microsoft Fabric, PySpark, SQL, and Power BI.
 It was proposed to fetch anime metadata via the Jikan REST API, transform it to an analytic dataset that does not contain errors and then store it in a lakehouse and make a dashboard to visualize the trends in anime ratings, genres, popularity, and studio performance.
 
 **Project Workflow**
+
 **Extract** -- Collection of Data on the Jikan API.
 
 In the beginning first i connected to Jikan Anime API through a PySpark notebook.
@@ -49,13 +51,16 @@ My last cleaned table, animecleaned, was developed after the cleaning process, w
 
 The final data had been stored in the Microsoft Fabric Lakehouse in Delta format.
 
-Load Loading with Fabric SQL Endpoint Querying and Modeling Endpoint Loading Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Loading Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Loading Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Loading Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Loading Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Querying and Modeling Endpoint Query
+
 
 In order to run the analytical queries stored in the SQL/ folder I made use of fabric SQL endpoint:
 
 SQL File Purpose
+
 sqltopanime.sql Retrieves 10 anime with the most score.
+
 sqlgenrecount.sql Counts of genres of anime.
+
 sqlyearcount.SQL Shows the distribution of anime according to the year of release.
 
 These SQL results were then linked to power BI to model data and visualize the data.
@@ -63,16 +68,23 @@ These SQL results were then linked to power BI to model data and visualize the d
 **Technologies & Tools Used**
 
 **Tool / Technology Role**
+
 PySpark Processing and converting data.
+
 Requests & Pandas Calling of API and initial JSON processing.
+
 Delta table storage Microsoft Fabric Lakehouse Raw and cleaned.
+
 Fabric SQL Endpoint Query and analytics.
+
 BI Desktop Design Dashboards.
+
 GitHub Version control and documentation.
 
 **My End to End Project Management.**
 
 **Cloned the Repository**
+
 git clone https://github.com/mishragourav0006-ops/animefabricproject.git.
 cd animefabricproject
 
@@ -90,15 +102,18 @@ Ran SQL Files for Analysis
 
 The table that had been purged and prepped with the key analytics such as: were checked by the SQL scripts.
 
-SELECT title, score
+SELECT title,score
+
 FROM animecleaned
+
 ORDER BY score DESC
+
 LIMIT 10;
 
 These deliverables were used to describe the Power BI images.
 
 
-Built the Power BI Dashboard
+**Built the Power BI Dashboard**
 
 Being the data source, I referred to the SQL endpoint and created visuals representing:
 
@@ -129,6 +144,7 @@ The same levels of popularity have not been enjoyed by some of the anime that ha
 The differences between the studios are great as far as average scores they produce are concerned.
 
 **Project Structure**
+
 animefabricproject/
 
 +-- dashboard/
@@ -143,6 +159,7 @@ animefabricproject/
 +-- sqlyear_count.sql
 
 +-- README.md
+
 
 **Conclusion***
 
