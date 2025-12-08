@@ -33,7 +33,7 @@ Seasons and release years
 
 The raw JSON data were converted into a DataFrame to be used in PySpark.
 
-Transform Cleaning Arranging the Data.
+**Transform Cleaning Arranging the Data.**
 
 In the Fabric PySpark notebook, I ran the following number of transformations:
 
@@ -47,7 +47,7 @@ Analysis of chosen and renamed columns had to be done.
 
 Added simplified column that has dashboard studio and genre column.
 
-My last cleaned table, animecleaned, was developed after the cleaning process, which would be the starting point of SQL queries and reports.
+**My last cleaned table, animecleaned, was developed after the cleaning process, which would be the starting point of SQL queries and reports.**
 
 The final data had been stored in the Microsoft Fabric Lakehouse in Delta format.
 
