@@ -1,6 +1,9 @@
 **Microsoft Fabric Anime Analytics ETL Pipeline.**
+
 **Dashboard Preview**
+
 It is easy to establish the driver factors that would contribute in the production of a new product.
+
 <img width="1100" height="633" alt="image" src="https://github.com/user-attachments/assets/f4cca76a-b2f1-40e3-94f6-60c081d605c7" />
 
 
